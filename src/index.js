@@ -6,6 +6,8 @@ mongo.connect()
 
 const app = express()
 
+app.use(express.json())
+
 app.get('/resume', resumeController.fetch)
 app.post('/resume', resumeController.create)
 app.patch('/resume', resumeController.update)
