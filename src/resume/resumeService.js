@@ -13,7 +13,23 @@ const fetchResume = async (userId) => {
 
 const createResume = async (userId) => {
     try {
-        const result = await mongo.db().collection(constants.MONGO_COLLECTIONS.RESUME).insertOne({ userId })
+        const resumeObj = {
+            userId,
+            image: '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            city: '',
+            country: '',
+            tags: [],
+            bio: '',
+            experiences: [],
+            education: [],
+            certifications: [],
+            events: []
+        }
+        const result = await mongo.db().collection(constants.MONGO_COLLECTIONS.RESUME).insertOne(resumeObj)
         return result.insertedId
     } catch (err) {
         console.warn(err)

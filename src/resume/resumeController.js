@@ -3,7 +3,7 @@ const resumeService = require('./resumeService')
 const fetch = async (req, res) => {
     const { userId } = req.query
     const response = {}
-    const resume = await resumeService.fetchResume(parseInt(userId))
+    const resume = await resumeService.fetchResume(userId)
     if (resume === null) {
         response.status = false
         response.message = 'Resume does not exist.'
@@ -17,12 +17,12 @@ const fetch = async (req, res) => {
 const create = async (req, res) => {
     const { userId } = req.query
     const response = {}
-    const resume = await resumeService.fetchResume(parseInt(userId))
+    const resume = await resumeService.fetchResume(userId)
     if (resume !== null) {
         response.status = false
         response.message = 'A resume exists already.'
     } else {
-        const _id = await resumeService.createResume(parseInt(userId))
+        const _id = await resumeService.createResume(userId)
         response.status = true
         response.resource = [_id]
     }
@@ -34,7 +34,7 @@ const update = async (req, res) => {
     const { userId } = req.query
     const body = req.body
     // TODO: Validation
-    const updated = await resumeService.updateResume(parseInt(userId), body)
+    const updated = await resumeService.updateResume(userId, body)
     if (updated) {
         response.status = true
         response.message = 'Updated successfully.'
