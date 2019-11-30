@@ -15,4 +15,4 @@ app.post('/resume', resumeController.create)
 app.patch('/resume', resumeController.update)
 app.delete('/resume', resumeController.purge)
 
-app.listen(8000)
+app.listen(process.env.PORT || 8000)
