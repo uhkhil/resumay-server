@@ -16,13 +16,14 @@ const fetch = async (req, res) => {
 
 const create = async (req, res) => {
     const { userId } = req.query
+    const { providerId, profile } = req.body
     const response = {}
     const resume = await resumeService.fetchResume(userId)
     if (resume !== null) {
         response.status = false
         response.message = 'A resume exists already.'
     } else {
-        const _id = await resumeService.createResume(userId)
+        const _id = await resumeService.createResume(userId, providerId, profile)
         response.status = true
         response.resource = [_id]
     }

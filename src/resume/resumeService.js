@@ -11,7 +11,7 @@ const fetchResume = async (userId) => {
     }
 }
 
-const createResume = async (userId) => {
+const createResume = async (userId, providerId, profile) => {
     try {
         const resumeObj = {
             userId,
@@ -28,6 +28,19 @@ const createResume = async (userId) => {
             education: [],
             certifications: [],
             events: []
+        }
+        // TODO: Add providerId wise checks
+        if (profile.given_name) {
+            resumeObj.firstName = profile.given_name
+        }
+        if (profile.family_name) {
+            resumeObj.lastName = profile.family_name
+        }
+        if (profile.picture) {
+            resumeObj.image = profile.picture
+        }
+        if (profile.email) {
+            resumeObj.email = profile.email
         }
         const result = await mongo.db().collection(constants.MONGO_COLLECTIONS.RESUME).insertOne(resumeObj)
         return result.insertedId
