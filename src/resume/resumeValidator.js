@@ -60,7 +60,7 @@ const tag = Joi.string().max(30)
 
 const resume = Joi.object({
     ...profileInfo,
-    bio: Joi.string().min(30).max(500).optional(),
+    bio: Joi.string().min(1).max(500).optional(),
     tags: Joi.array().items(tag).optional(),
     experiences: Joi.array().items(company).optional(),
     education: Joi.array().items(education).optional(),
