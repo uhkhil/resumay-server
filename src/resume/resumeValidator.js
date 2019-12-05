@@ -5,7 +5,7 @@ const event = Joi.object({
     eventName: Joi.string().min(1).max(30).required(),
     instituteName: Joi.string().min(1).max(30).required(),
     date: Joi.date().max('now').required(),
-    description: Joi.string().max(500).optional(),
+    description: Joi.string().allow('').max(500).optional(),
 })
 
 const certification = Joi.object({
@@ -14,7 +14,7 @@ const certification = Joi.object({
     startDate: Joi.date().max('now').required(),
     endDate: Joi.date().max('now').required(),
     location: Joi.string().min(1).max(30).required(),
-    description: Joi.string().max(500).optional(),
+    description: Joi.string().allow('').max(500).optional(),
 })
 
 const education = Joi.object({
@@ -23,15 +23,15 @@ const education = Joi.object({
     startDate: Joi.date().max('now').required(),
     endDate: Joi.date().max('now').required(),
     location: Joi.string().min(1).max(30).required(),
-    description: Joi.string().max(500).optional(),
+    description: Joi.string().allow('').max(500).optional(),
 })
 
 const project = Joi.object({
     projectName: Joi.string().min(1).max(30).required(),
     date: Joi.date().max('now').required(),
     skills: Joi.array(),
-    link: Joi.string().min(1).max(30).optional(),
-    description: Joi.string().max(500).optional(),
+    link: Joi.string().allow('').max(30).optional(),
+    description: Joi.string().allow('').max(500).optional(),
 })
 
 const company = Joi.object({
@@ -40,7 +40,7 @@ const company = Joi.object({
     startDate: Joi.date().max('now').required(),
     endDate: Joi.date().max('now').required(),
     location: Joi.string().min(1).max(30).required(),
-    description: Joi.string().max(500).optional(),
+    description: Joi.string().allow('').max(500).optional(),
     projects: Joi.array().items(project).optional()
 })
 

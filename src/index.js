@@ -6,9 +6,7 @@ const mongo = require('./services/mongo')
 const resumeController = require('./resume/resumeController')
 const resumeValidator = require('./resume/resumeValidator')
 
-console.log('TCL: process.env.FIREBASE_CERT', process.env.FIREBASE_CERT);
 const firebaseCredentials = JSON.parse(process.env.FIREBASE_CERT)
-console.log('TCL: firebaseCredentials', firebaseCredentials);
 
 admin.initializeApp({
     credential: admin.credential.cert(firebaseCredentials),
