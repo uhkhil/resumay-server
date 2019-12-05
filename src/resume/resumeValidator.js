@@ -26,10 +26,12 @@ const education = Joi.object({
     description: Joi.string().allow('').max(500).optional(),
 })
 
+const skill = Joi.string().max(30)
+
 const project = Joi.object({
     projectName: Joi.string().min(1).max(30).required(),
     date: Joi.date().max('now').required(),
-    skills: Joi.array(),
+    skills: Joi.array().items(skill).optional(),
     link: Joi.string().allow('').max(30).optional(),
     description: Joi.string().allow('').max(500).optional(),
 })
@@ -54,9 +56,12 @@ const profileInfo = {
     country: Joi.string().min(1).max(30).optional(),
 }
 
+const tag = Joi.string().max(30)
+
 const resume = Joi.object({
     ...profileInfo,
     bio: Joi.string().min(30).max(500).optional(),
+    tags: Joi.array().items(tag).optional(),
     experiences: Joi.array().items(company).optional(),
     education: Joi.array().items(education).optional(),
     certifications: Joi.array().items(certification).optional(),
