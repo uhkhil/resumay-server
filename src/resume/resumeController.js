@@ -1,8 +1,8 @@
 const resumeService = require('./resumeService')
 
 const fetch = async (req, res) => {
-    const { userId } = req.query
     const response = {}
+    const { userId } = req.query
     const resume = await resumeService.fetchResume(userId)
     if (resume === null) {
         response.status = false
@@ -15,9 +15,10 @@ const fetch = async (req, res) => {
 }
 
 const create = async (req, res) => {
-    const { userId } = req.query
-    const { providerId, profile } = req.body
     const response = {}
+    const user = await resumeService.extractUserInfo(req)
+    const userId = user.uid
+    const { providerId, profile } = req.body
     const resume = await resumeService.fetchResume(userId)
     if (resume !== null) {
         response.status = false
@@ -32,9 +33,9 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
     const response = {}
-    const { userId } = req.query
+    const user = await resumeService.extractUserInfo(req)
+    const userId = user.uid
     const body = req.body
-    // TODO: Validation
     const updated = await resumeService.updateResume(userId, body)
     if (updated) {
         response.status = true

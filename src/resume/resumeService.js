@@ -1,5 +1,18 @@
+const admin = require('firebase-admin');
+
 const mongo = require('../services/mongo')
 const constants = require('../constants')
+
+const extractUserInfo = async (req) => {
+    try {
+        const { idtoken } = req.headers
+        const user = await admin.auth().verifyIdToken(idtoken)
+        return user
+    } catch (err) {
+        console.error(err)
+        return null
+    }
+}
 
 const fetchResume = async (userId) => {
     try {
@@ -61,6 +74,7 @@ const updateResume = async (userId, body) => {
 }
 
 module.exports = {
+    extractUserInfo,
     fetchResume,
     createResume,
     updateResume
