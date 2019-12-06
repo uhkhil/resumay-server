@@ -32,7 +32,7 @@ const project = Joi.object({
     projectName: Joi.string().min(1).max(30).required(),
     date: Joi.date().max('now').required(),
     skills: Joi.array().items(skill).optional(),
-    link: Joi.string().allow('').max(30).optional(),
+    link: Joi.string().allow('').max(500).optional(),
     description: Joi.string().allow('').max(500).optional(),
 })
 
